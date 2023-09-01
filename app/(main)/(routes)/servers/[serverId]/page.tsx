@@ -1,5 +1,9 @@
+"use client";
+
+import { useParams } from "next/navigation";
 const ServerIdPage = () => {
-  return <div>Server Id Page</div>;
+  const params = useParams();
+  return <div>Server Id Page {params.serverId}</div>;
 };
 
 export default ServerIdPage;

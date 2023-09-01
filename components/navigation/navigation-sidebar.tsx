@@ -6,7 +6,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 import { redirect } from "next/navigation";
 import { NavigationAction } from "./navigation-action";
-import { NavigationItem } from "./navigation-tiems";
+import { NavigationItem } from "./navigation-items";
 import { UserButton } from "@clerk/nextjs";
 
 export const NavigationSidebar = async () => {
