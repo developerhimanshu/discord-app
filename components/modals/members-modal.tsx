@@ -122,7 +122,9 @@ export const MembersModal = () => {
                 <div className="ml-auto">
                   <DropdownMenu>
                     <DropdownMenuTrigger>
-                      <MoreVertical className="h-4 w-4 text-zinc-500" />
+                      {!loadingId && (
+                        <MoreVertical className="h-4 w-4 text-zinc-500" />
+                      )}
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="left">
                       <DropdownMenuSub>
@@ -156,7 +158,10 @@ export const MembersModal = () => {
                         </DropdownMenuPortal>
                       </DropdownMenuSub>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => onKick(member.id)}>
+                      <DropdownMenuItem
+                        onClick={() => onKick(member.id)}
+                        className="text-rose-500"
+                      >
                         <Gavel className="h-4 w-4 mr-2" />
                         Kick
                       </DropdownMenuItem>
