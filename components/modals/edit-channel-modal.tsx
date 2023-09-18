@@ -56,27 +56,28 @@ export const EditChannelModel = () => {
   const router = useRouter();
   const params = useParams();
   const isModalOpen = isOpen && type === "editChannel";
-  const { server, channel } = data;
-  const { channelType } = data;
+  const { channelType, server, channel } = data;
   // const { channelType } = data;
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      type: channelType || ChannelType.TEXT,
+      name: channel?.name,
+      type: channel?.type || ChannelType.TEXT,
     },
   });
 
   useEffect(() => {
-    if (channelType) {
-      form.setValue("type", channelType);
-    } else {
-      form.setValue("type", ChannelType.TEXT);
+    if (channel) {
+      form.setValue("name", channel.name);
+      form.setValue("type", channel.type);
     }
-  }, [channelType, form]);
+  }, [form, channel]);
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: {
+    name: string | undefined;
+    type: ChannelType;
+  }) => {
     try {
       const url = qs.stringifyUrl({
         url: `/api/channels/${channel?.id}`,
@@ -124,7 +125,6 @@ export const EditChannelModel = () => {
                         className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                         placeholder="Enter channel name"
                         {...field}
-                        value={data?.channel?.name}
                       />
                     </FormControl>
                     <FormMessage />
